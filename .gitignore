@@ -2,4 +2,8 @@ dist/
 node_modules/
 .cache/
 .env
+.vscode/git
+yarn-error.log
 .vscode/
+package-lock.json
+yarn.lock

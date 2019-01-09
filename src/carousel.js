@@ -1,0 +1,53 @@
+import React, { Component } from 'react'
+
+export default class Carousel extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.handleIndexClick = this.handleIndexClick.bind(this);
+        this.state = {
+            photos: [],
+            active: 0
+        }
+    }
+
+    static getDerivedStateFromProps({ media }) {
+        let photos = [];
+
+        if (media && media.photos && media.photos.photo) {
+            photos = media.photos.photo.filter( photo => photo['@size'] === 'pn');
+        }
+        
+        return { photos };
+    }
+
+    handleIndexClick(event) {
+        this.setState({
+            active: +event.target.dataset.index
+        })
+    }
+
+    render () {
+        const { photos, active } = this.state;
+
+        return (
+            <div className="carousele">
+                <img src={photos[active].value} alt="primary animal"/>
+                <div className="carousel-smaller">
+                    {photos.map((photo, index) => (
+                        <img
+                            onClick={this.handleIndexClick} 
+                            key={photo.value}
+                            data-index={index} 
+                            src={photo.value} 
+                            className={index === active ? 'active' : ''}
+                            alt="animal thumbnail"
+                        />
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+}
