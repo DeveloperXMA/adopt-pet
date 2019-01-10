@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 export default class Carousel extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.handleIndexClick = this.handleIndexClick.bind(this);
         this.state = {
             photos: [],
             active: 0
@@ -22,7 +21,7 @@ export default class Carousel extends React.Component {
         return { photos };
     }
 
-    handleIndexClick(event) {
+    handleIndexClick = (event) => {
         this.setState({
             active: +event.target.dataset.index
         })
@@ -36,6 +35,7 @@ export default class Carousel extends React.Component {
                 <img src={photos[active].value} alt="primary animal"/>
                 <div className="carousel-smaller">
                     {photos.map((photo, index) => (
+                        /* eslint-disable-next-line */
                         <img
                             onClick={this.handleIndexClick} 
                             key={photo.value}
@@ -49,5 +49,4 @@ export default class Carousel extends React.Component {
             </div>
         )
     }
-
 }
