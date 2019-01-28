@@ -4,14 +4,14 @@ import { navigate } from '@reach/router';
 
 export default class SearchParams extends React.Component {
 
-  handleSearchSubmit() {
+  search() {
     navigate('/');
   }
 
   render () {
     return (
         <div className="search-route">
-            <SearchBox search={this.handleSearchSubmit} />
+            <SearchBox search={this.search} />
         </div>
     )
   }
