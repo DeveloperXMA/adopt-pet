@@ -1,8 +1,12 @@
 import React from 'react';
 import { ANIMALS } from 'petfinder-client';
-import { Consumer } from "./SearchContext";
+import { connect } from "react-redux";
+import getBreeds from "./actionCreators/getBreeds";
+import changeLocation from "./actionCreators/changeLocation";
+import changeAnimal from "./actionCreators/changeAnimal";
+import changeBreed from "./actionCreators/changeBreed";
 
-export default class SearchBox extends React.Component {
+class Search extends React.Component {
 
     handleFormSubmit =(event) => {
         event.preventDefault();
@@ -11,25 +15,23 @@ export default class SearchBox extends React.Component {
 
   render() {
     return (
-      <Consumer>
-        {context => (
           <div className="search-params">
             <form onSubmit={this.handleFormSubmit}>
             <label htmlFor="location">
                 Location
                 <input
                     id="location"
-                    value={context.location}
-                    onChange={context.handleLocationChange}
+                    value={this.props.location}
+                    onChange={this.props.handleLocationChange}
                     placeholder="Location"/>
                 </label>
                 <label htmlFor="animal">
                 Animal
                 <select
                     id="animal"
-                    value={context.animal}
-                    onChange={context.handleAnimalChange}
-                    onBlur={context.handleAnimalChange}
+                    value={this.props.animal}
+                    onChange={this.props.handleAnimalChange}
+                    onBlur={this.props.handleAnimalChange}
                 >
                 <option/> 
                 {
@@ -45,13 +47,13 @@ export default class SearchBox extends React.Component {
                 breed
                 <select
                     id="breed"
-                    value={context.breed}
-                    onChange={context.handleBreedChange}
-                    onBlur={context.handleBreedChange}
-                    disabled={!context.breeds.length}
+                    value={this.props.breed}
+                    onChange={this.props.handleBreedChange}
+                    onBlur={this.props.handleBreedChange}
+                    disabled={!this.props.breeds.length}
                 >
                     <option/>
-                    {context.breeds.map(breed => (
+                    {this.props.breeds.map(breed => (
                     <option key={breed} value={breed}>
                         {breed}
                     </option>
@@ -61,8 +63,31 @@ export default class SearchBox extends React.Component {
                 <button>Submit</button>
             </form>
           </div>
-        )}
-      </Consumer>
     )
   }
 }
+
+const mapStateToProps = ({ breed, breeds, animal, location }) => ({
+    breed,
+    breeds,
+    location,
+    animal
+});
+
+const mapDispatchToProps = dispatch => ({
+    handleAnimalChange(event) {
+        dispatch(changeAnimal(event.target.value));
+        dispatch(getBreeds());
+    },
+    handleBreedChange(event) {
+        dispatch(changeBreed(event.target.value));
+    },
+    handleLocationChange(event) {
+        dispatch(changeLocation(event.target.value));
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Search);
