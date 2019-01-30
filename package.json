@@ -9,7 +9,7 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "dev": "parcel src/index.html",
     "build": "parcel build --public-url ./dist/ src/index.html",
-    "start": "babel-node server/index.js"
+    "start": "npm run build && nodemon --exec babel-node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
+    "nodemon": "^1.18.9",
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2"
   },
