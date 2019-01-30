@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Link } from '@reach/router';
 
 export default class Pet extends React.Component {

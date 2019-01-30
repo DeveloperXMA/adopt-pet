@@ -23,7 +23,7 @@ const NavLink = styled(Link)`
 const NavBar = () => (
     <Container>
         <NavLink to="/">
-            Adopt me!
+            Adopt me!385670ipoihh
         </NavLink>
         <NavLink to="/search-params">
             <span aria-label="search" role="img">

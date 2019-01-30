@@ -1,8 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Router, Link } from "@reach/router";
 import store from "./store";
-import Results from "./Results";
+import Results from "./results";
 import Details from "./Details";
 import SearchParams from "./SearchParams";
 import {
@@ -30,9 +29,8 @@ class App extends React.Component {
             </Router>
         </div>  
       </Provider>
-    
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;
